@@ -23,8 +23,8 @@ def products(request):
     bd_categories=ProductCategory.objects.all()
 
 
-    json_products=os.path.join(MODULE_DIR,'fixtures/products.json')
-    json_categories=os.path.join(MODULE_DIR,'fixtures/categories.json')
+    json_products=os.path.join(MODULE_DIR, 'fixtures/01products.json')
+    json_categories=os.path.join(MODULE_DIR, 'fixtures/01categories.json')
     context = {
         'title': 'Geekshop | Товары',
         'products': bd_products,#json.load(open(json_products,encoding='utf-8')),
