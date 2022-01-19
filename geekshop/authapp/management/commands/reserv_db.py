@@ -18,18 +18,23 @@ def file_exists(file_way):
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        print('Здесь  будет скрипт резервтрования бд Product, ProductCategory, User')
+        print('Скрипт резервирования из бд Product, ProductCategory, User')
         print(f'Корневая папка пректа: {BASE_DIR}')
 
         if file_exists('\\db.sqlite3'):
-            print('Uploading Users')
+            print('+ DB exists')
+            print('Applying migrations:')
+            cmd((f'python manage.py migrate'))
+            print('->Reserv Users')
             cmd(f'python -X utf8 manage.py dumpdata authapp.User -o {str(BASE_DIR)}\\authapp\\fixtures\\User.json')
-            print('+Uploading Users')
-            print('Uploading Products')
+            print('+ Reseved Users')
+            print('->Reserv Products')
             cmd(f'python -X utf8 manage.py dumpdata mainapp.Product -o {str(BASE_DIR)}\\mainapp\\fixtures\\Products.json')
-            print('+Uploading Products')
-            print('Uploading Categories')
+            print('+ Reseved Products')
+            print('->Reserv Categories')
             cmd(f'python -X utf8 manage.py dumpdata mainapp.ProductCategory -o {str(BASE_DIR)}\\mainapp\\fixtures\\Categories.json')
-            print('+Uploading Categories')
+            print('+ Reseved Categories')
+        else:
+            print('! Data Base not found: Exit')
 
 
